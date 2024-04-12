@@ -28,6 +28,7 @@ def save_scores_to_csv(scores, session_id):
             row = {'Model': model_name}
             row.update(model_scores)
             writer.writerow(row)
+
 task_dir = ['BGReplacement', 'ColorAlteration', 'Counting', 'Deblurring', 'DirectionPerception', 'HazeRemoval',
             'Lowlight', 'NoiseRemoval', 'ObjectRemoval', 'RainRemoval', 'RegionAccuracy', 'Replacement', 'ShadowRemoval',
             'SnowRemoval', 'StyleAlteration', 'WatermarkRemoval']
@@ -92,7 +93,7 @@ if task != "RegionAccuracy" :
         st.image(img_A, use_column_width=True)
 
     with col2:
-        st.write(f"Edited by {model_name} :camera:")
+        st.write(f"Edited by model :camera:")
         st.image(img_B, use_column_width=True)
     # Sidebar
     with st.sidebar:
@@ -135,7 +136,7 @@ else:
         st.write("Mask image :camera:")
         st.image(img_B, use_column_width=True)
     with col3:
-        st.write(f"Edited by {model_name} :camera:")
+        st.write(f"Edited by model :camera:")
         st.image(img_C, use_column_width=True)
     # Sidebar
     with st.sidebar:
@@ -152,5 +153,5 @@ else:
             score = int(st.session_state['user_choice'])
             st.session_state['scores'][model_name][task] += score
             st.session_state['model_index'] += 1
-            # save_scores_to_csv(st.session_state['scores'], session_id)
+
             st.experimental_rerun()
